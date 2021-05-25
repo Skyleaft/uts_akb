@@ -30,6 +30,13 @@ dependencies:
   simple_animations: ^3.1.1
   flutter_native_splash: ^1.1.8+4
   sa_v1_migration: ^1.1.2
+  intl: ^0.17.0
+  google_fonts: ^2.1.0
+  curved_navigation_bar: ^0.3.7
+  flutter_icons: ^1.1.0
+  flutter_screenutil: ^5.0.0+2
+  animated_bottom_navigation_bar: ^0.3.2
+  adaptive_dialog: ^0.10.0+5
 
 dev_dependencies:
   flutter_test:
