@@ -9,7 +9,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class Home extends State<Home> {
+class _HomeState extends State<Home> {
   // Track active index
   int activeIndex = 0;
   @override
