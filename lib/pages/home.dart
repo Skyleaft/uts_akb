@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uts_akb/pages/setting.dart';
 import 'package:uts_akb/pages/showdata.dart';
 import 'package:uts_akb/utils/constants.dart';
 import 'package:uts_akb/pages/adddata.dart';
@@ -14,6 +15,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // Track active index
   int activeIndex = 0;
+
+  static const List<Widget> _widgetOptions = <Widget>[
+    ShowData(),
+    AddData(),
+    Setting(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      activeIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +51,7 @@ class _HomeState extends State<Home> {
             color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
           ),
         ],
-        onTap: (index) {
-          setState(() {
-            activeIndex = index;
-          });
-        },
+        onTap: _onItemTapped,
       ),
       backgroundColor: Constants.primaryColor,
       body: Stack(
@@ -151,7 +161,7 @@ class _HomeState extends State<Home> {
                     padding: EdgeInsets.symmetric(
                       vertical: 24.0,
                     ),
-                    child: ShowData(),
+                    child: _widgetOptions.elementAt(activeIndex),
                   )
                 ],
               ),
