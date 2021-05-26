@@ -1,0 +1,36 @@
+Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment(0.8, 0.0),
+                                colors: [
+                                  Color.fromRGBO(83, 80, 224, 1),
+                                  Color.fromRGBO(62, 61, 146, 1),
+                                ]),
+                          ),
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                chekUser(cusername, cpassword);
+                                if (statusLog) {
+                                  nextScreen(context, "/Home");
+                                }
+                              },
+                              borderRadius: BorderRadius.circular(15.0),
+                              splashColor: Colors.indigo[400],
+                              child: Center(
+                                child: Text(
+                                  "Login",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),

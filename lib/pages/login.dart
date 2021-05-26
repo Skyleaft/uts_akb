@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uts_akb/Animation/FadeAnimation.dart';
 import 'package:uts_akb/utils/helper.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'dart:async';
 
 class Login extends StatefulWidget {
   @override
@@ -9,16 +10,61 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final RoundedLoadingButtonController _btnController2 =
+      RoundedLoadingButtonController();
+
+  Future<void> _showMyDialog(String _tittle, String _msg) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(_tittle),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(_msg),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _doSomething(RoundedLoadingButtonController controller) async {
+    Timer(Duration(seconds: 2), () {
+      chekUser(cusername, cpassword);
+      if (statusLog) {
+        controller.success();
+        nextScreen(context, "/Home");
+      } else {
+        controller.error();
+      }
+      Timer(Duration(seconds: 2), () {
+        _btnController2.reset();
+      });
+    });
+  }
+
   final cusername = TextEditingController();
   final cpassword = TextEditingController();
   var statusLog = false;
 
   void chekUser(TextEditingController _user, _pass) {
     if (_user.text == "" && _pass.text == "") {
-      print("username/password masih kosong");
+      _showMyDialog("Peringatan", "Username/Password masih kosong");
       statusLog = false;
     } else if (_user.text != "admin" && _pass.text != "admin") {
-      print("username/password salah");
+      _showMyDialog("Peringatan", "username/password salah");
       statusLog = false;
     } else if (_user.text == "admin" && _pass.text == "admin") {
       statusLog = true;
@@ -147,41 +193,14 @@ class _LoginState extends State<Login> {
                       ),
                       FadeAnimation(
                         2,
-                        Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment(0.8, 0.0),
-                                colors: [
-                                  Color.fromRGBO(83, 80, 224, 1),
-                                  Color.fromRGBO(62, 61, 146, 1),
-                                ]),
-                          ),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                chekUser(cusername, cpassword);
-                                if (statusLog) {
-                                  nextScreen(context, "/Home");
-                                }
-                              },
-                              borderRadius: BorderRadius.circular(15.0),
-                              splashColor: Colors.indigo[400],
-                              child: Center(
-                                child: Text(
-                                  "Login",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                        RoundedLoadingButton(
+                          color: Colors.indigo[600],
+                          successColor: Colors.green[800],
+                          controller: _btnController2,
+                          onPressed: () => _doSomething(_btnController2),
+                          borderRadius: 8,
+                          child: Text('Login',
+                              style: TextStyle(color: Colors.white)),
                         ),
                       ),
                       SizedBox(
