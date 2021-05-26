@@ -9,13 +9,12 @@ void main() {
   runApp(MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: Size(375, 812),
-      builder: () =>  MaterialApp(
+      builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "UTS AKB - Milzan Malik",
         theme: ThemeData(
