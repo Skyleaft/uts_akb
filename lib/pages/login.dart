@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:uts_akb/Animation/FadeAnimation.dart';
 import 'package:uts_akb/utils/helper.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+  @override
+  _LoginState createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   final cusername = TextEditingController();
   final cpassword = TextEditingController();
   var statusLog = false;
