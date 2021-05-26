@@ -2,7 +2,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:uts_akb/pages/showdata.dart';
 import 'package:uts_akb/utils/constants.dart';
+import 'package:uts_akb/pages/adddata.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -149,31 +151,7 @@ class _HomeState extends State<Home> {
                     padding: EdgeInsets.symmetric(
                       vertical: 24.0,
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 24.0,
-                          ),
-                          child: Text(
-                            "New Locations",
-                            style: TextStyle(
-                              color: Color.fromRGBO(19, 22, 33, 1),
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 7.0),
-                        Container(
-                          height: ScreenUtil().setHeight(100.0),
-                          child: Center(
-                              // lets make a widget for the cards
-                              ),
-                        ),
-                      ],
-                    ),
+                    child: ShowData(),
                   )
                 ],
               ),
