@@ -25,24 +25,14 @@ class _HomeState extends State<Home> {
             color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.map_marker_radius_mco,
+            FlutterIcons.plus_ant,
             size: 30.0,
             color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.plus_ant,
-            size: 30.0,
-            color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
-          ),
-          Icon(
-            FlutterIcons.heart_fea,
-            size: 30.0,
-            color: activeIndex == 3 ? Colors.white : Color(0xFFC8C9CB),
-          ),
-          Icon(
             FlutterIcons.setting_ant,
             size: 30.0,
-            color: activeIndex == 4 ? Colors.white : Color(0xFFC8C9CB),
+            color: activeIndex == 2 ? Colors.white : Color(0xFFC8C9CB),
           ),
         ],
         onTap: (index) {
@@ -107,7 +97,7 @@ class _HomeState extends State<Home> {
                                         ),
                                   ),
                                   TextSpan(
-                                    text: "FlutterPanda!",
+                                    text: "Admin",
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline6
@@ -119,9 +109,23 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                             ),
-                            Image.asset(
-                              "assets/images/dp.png",
-                            )
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 5,
+                                      color: Colors.white,
+                                      spreadRadius: 2)
+                                ],
+                              ),
+                              child: CircleAvatar(
+                                radius: 30.0,
+                                backgroundImage:
+                                    AssetImage('assets/images/ppall(3).jpg'),
+                              ),
+                            ),
                           ],
                         )
                       ],
@@ -165,8 +169,8 @@ class _HomeState extends State<Home> {
                         Container(
                           height: ScreenUtil().setHeight(100.0),
                           child: Center(
-                            // lets make a widget for the cards
-                          ),
+                              // lets make a widget for the cards
+                              ),
                         ),
                       ],
                     ),
