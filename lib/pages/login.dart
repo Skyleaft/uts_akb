@@ -3,6 +3,7 @@ import 'package:uts_akb/Animation/FadeAnimation.dart';
 import 'package:uts_akb/utils/helper.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'dart:async';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -68,6 +69,12 @@ class _LoginState extends State<Login> {
       statusLog = false;
     } else if (_user.text == "admin" && _pass.text == "admin") {
       statusLog = true;
+      Fluttertoast.showToast(
+          msg: "Selamat Datang Kembali, Admin",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
     }
   }
 
