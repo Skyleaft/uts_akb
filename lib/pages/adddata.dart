@@ -1,16 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:uts_akb/models/mahasiswa.dart';
 import 'package:uts_akb/utils/constants.dart';
 import 'dart:async';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:uts_akb/db/db_mhs.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 var txtnim = TextEditingController();
 var txtnama = TextEditingController();
 var txtkelas = TextEditingController();
 var txtprodi = TextEditingController();
 
+void clearText() {
+  txtnim.text = "";
+  txtnama.text = "";
+  txtkelas.text = "";
+  txtprodi.text = "";
+}
+
+var checkstats = false;
 var _btnController2 = RoundedLoadingButtonController();
 void _doSomething(RoundedLoadingButtonController controller) async {
-  Timer(Duration(seconds: 2), () {});
+  Timer(Duration(seconds: 1), () {
+    saveData();
+    if (checkstats = true) {
+      controller.success();
+      Fluttertoast.showToast(
+          msg: "Data Berhasil Disimpan",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
+    }
+    clearText();
+    Timer(Duration(seconds: 2), () {
+      _btnController2.reset();
+    });
+  });
+}
+
+Future saveData() async {
+  final mhs = Mahasiswa(
+    nim: txtnim.text,
+    namaLengkap: txtnama.text,
+    kelas: txtkelas.text,
+    prodi: txtprodi.text,
+  );
+  checkstats = true;
+  await MhsDatabase.instance.create(mhs);
 }
 
 class AddData extends StatelessWidget {
@@ -82,9 +119,10 @@ class AddData extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 10.0,
+              height: 15.0,
             ),
             RoundedLoadingButton(
+              width: MediaQuery.of(context).size.width,
               color: Constants.primaryColor,
               successColor: Colors.green[800],
               controller: _btnController2,
@@ -98,7 +136,9 @@ class AddData extends StatelessWidget {
                 style: TextButton.styleFrom(
                     primary: Constants.primaryColor,
                     textStyle: TextStyle(fontSize: 16)),
-                onPressed: () {},
+                onPressed: () {
+                  clearText();
+                },
                 child: const Text("Clear"),
               ),
             ),

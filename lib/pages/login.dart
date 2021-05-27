@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
   final cpassword = TextEditingController();
   var statusLog = false;
 
-  void chekUser(TextEditingController _user, _pass) {
+  void chekUser(TextEditingController _user, _pass) async {
     if (_user.text == "" && _pass.text == "") {
       _showMyDialog("Peringatan", "Username/Password masih kosong");
       statusLog = false;

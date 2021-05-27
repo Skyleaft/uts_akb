@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uts_akb/db/db_mhs.dart';
 import 'package:uts_akb/models/mahasiswa.dart';
 import 'package:uts_akb/utils/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -7,6 +8,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Detailmhs extends StatelessWidget {
   final Mahasiswa mhs;
   Detailmhs({Key key, this.mhs}) : super(key: key);
+
+  @override
+  void dispose() {}
 
   var txtnim = TextEditingController();
   var txtnama = TextEditingController();
@@ -165,7 +169,9 @@ class Detailmhs extends StatelessWidget {
                             style: ElevatedButton.styleFrom(
                               primary: Constants.primaryColor,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                             child: const Text('Ubah'),
                           ),
                           SizedBox(
@@ -178,7 +184,10 @@ class Detailmhs extends StatelessWidget {
                                 primary: Colors.red,
                                 textStyle:
                                     TextStyle(fontWeight: FontWeight.bold)),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await MhsDatabase.instance.delete(mhs.id);
+                              Navigator.of(context).pop();
+                            },
                           ),
                         ],
                       ),

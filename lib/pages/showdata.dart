@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:uts_akb/db/db_mhs.dart';
 import 'package:uts_akb/models/mahasiswa.dart';
-import 'package:uts_akb/utils/constants.dart';
+import 'package:uts_akb/pages/detailmhs.dart';
 import 'package:uts_akb/widget/cardmhs.dart';
+import 'dart:async';
 
-final List<Mahasiswa> mahasiswa = [
-  Mahasiswa(
-    id: 507,
-    nim: "10118220",
-    namaLengkap: "Milzan Malik",
-    kelas: "IF-5",
-    prodi: "Teknik Informatika",
-  ),
-  Mahasiswa(
-    id: 23,
-    nim: "10118231",
-    namaLengkap: "Ridho Subhan",
-    kelas: "IF-3",
-    prodi: "Teknik Informatika",
-  ),
-];
+class ShowData extends StatefulWidget {
+  @override
+  _ShowDataState createState() => _ShowDataState();
+}
 
-class ShowData extends StatelessWidget {
-  const ShowData({Key key}) : super(key: key);
+class _ShowDataState extends State<ShowData> {
+  List<Mahasiswa> mahasiswa = [];
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    refreshMahasiswa();
+  }
+
+  Future refreshMahasiswa() async {
+    setState(() => isLoading = true);
+
+    this.mahasiswa = await MhsDatabase.instance.readAllMahasiswa();
+
+    setState(() => isLoading = false);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,26 +62,63 @@ class ShowData extends StatelessWidget {
           SizedBox(
             height: 10.0,
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 10.0,
-            ),
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) {
-              // Lets pass the order to a new widget and render it there
-              return CardMhs(
-                mhs: mahasiswa[index],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: 15.0,
-              );
-            },
-            itemCount: mahasiswa.length,
-          )
+          isLoading
+              ? CircularProgressIndicator()
+              : mahasiswa.isEmpty
+                  ? Center(
+                      child: Text(
+                      'Data Masih Kosong',
+                      style: TextStyle(color: Colors.grey, fontSize: 24),
+                    ))
+                  : ListView.separated(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 10.0,
+                      ),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (BuildContext context, int index) {
+                        // Lets pass the order to a new widget and render it there
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8.0),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 5,
+                                color: Colors.grey[300],
+                                spreadRadius: .8,
+                                offset: Offset(0, 4),
+                              )
+                            ],
+                          ),
+                          child: Material(
+                            color: Colors.white,
+                            child: InkWell(
+                              onTap: () {
+                                //print(mhs.kelas);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Detailmhs(mhs: mahasiswa[index]),
+                                  ),
+                                );
+                              },
+                              child: CardMhs(
+                                mhs: mahasiswa[index],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: 15.0,
+                        );
+                      },
+                      itemCount: mahasiswa.length,
+                    )
           // Let's create an order model
         ],
       ),

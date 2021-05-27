@@ -16,7 +16,7 @@ class _HomeState extends State<Home> {
   // Track active index
   int activeIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static List<Widget> _widgetOptions = <Widget>[
     ShowData(),
     AddData(),
     Setting(),
