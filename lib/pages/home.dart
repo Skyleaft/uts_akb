@@ -84,15 +84,6 @@ class _HomeState extends State<Home> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(
-                            FlutterIcons.keyboard_backspace_mdi,
-                            color: Colors.white,
-                          ),
-                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -122,6 +113,7 @@ class _HomeState extends State<Home> {
                               ),
                             ),
                             Container(
+                              margin: const EdgeInsets.only(right: 15.0),
                               decoration: BoxDecoration(
                                 color: Colors.white,
                                 shape: BoxShape.circle,

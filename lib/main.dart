@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:uts_akb/pages/detailmhs.dart';
 import 'package:uts_akb/pages/home.dart';
 import 'package:uts_akb/pages/login.dart';
 import 'package:uts_akb/utils/constants.dart';
@@ -38,6 +39,10 @@ Route<dynamic> _onGenerateRoute(RouteSettings settings) {
     case "/Home":
       return MaterialPageRoute(builder: (BuildContext context) {
         return Home();
+      });
+    case "/Detailmhs":
+      return MaterialPageRoute(builder: (BuildContext context) {
+        return Detailmhs();
       });
     default:
       return MaterialPageRoute(builder: (BuildContext context) {
