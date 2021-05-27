@@ -26,6 +26,56 @@ class Detailmhs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _showMyDialog(String _tittle, String _msg) async {
+      return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(_tittle),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text(_msg),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Tidak'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Ya'),
+                onPressed: () async {
+                  await MhsDatabase.instance.delete(mhs.id);
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    Future updateMhs() async {
+      final tempmhs = Mahasiswa(
+        id: mhs.id,
+        nim: txtnim.text,
+        namaLengkap: txtnama.text,
+        kelas: txtkelas.text,
+        prodi: txtprodi.text,
+      );
+      await MhsDatabase.instance.update(tempmhs);
+    }
+
+    void onClose() {
+      Navigator.pop(context);
+    }
+
     setText();
     return Scaffold(
       backgroundColor: Constants.primaryColor,
@@ -54,7 +104,7 @@ class Detailmhs extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.pop(context);
+                        onClose();
                       },
                       child: Icon(
                         FlutterIcons.keyboard_backspace_mdi,
@@ -170,7 +220,8 @@ class Detailmhs extends StatelessWidget {
                               primary: Constants.primaryColor,
                             ),
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              updateMhs();
+                              onClose();
                             },
                             child: const Text('Ubah'),
                           ),
@@ -185,8 +236,8 @@ class Detailmhs extends StatelessWidget {
                                 textStyle:
                                     TextStyle(fontWeight: FontWeight.bold)),
                             onPressed: () async {
-                              await MhsDatabase.instance.delete(mhs.id);
-                              Navigator.of(context).pop();
+                              _showMyDialog(
+                                  "Peringatan", "Yakin Data mau Dihapus?");
                             },
                           ),
                         ],

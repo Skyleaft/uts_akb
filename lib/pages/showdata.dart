@@ -93,8 +93,9 @@ class _ShowDataState extends State<ShowData> {
                             ],
                           ),
                           child: Material(
-                            color: Colors.white,
+                            color: Colors.transparent,
                             child: InkWell(
+                              borderRadius: BorderRadius.circular(8.0),
                               onTap: () {
                                 //print(mhs.kelas);
                                 Navigator.push(
@@ -103,7 +104,7 @@ class _ShowDataState extends State<ShowData> {
                                     builder: (context) =>
                                         Detailmhs(mhs: mahasiswa[index]),
                                   ),
-                                );
+                                ).then((value) => {refreshMahasiswa()});
                               },
                               child: CardMhs(
                                 mhs: mahasiswa[index],
