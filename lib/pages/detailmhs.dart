@@ -5,6 +5,7 @@ import 'package:uts_akb/utils/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 
 class Detailmhs extends StatelessWidget {
   final Mahasiswa mhs;
@@ -182,7 +183,14 @@ class Detailmhs extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'NIM',
+                              counterText: "",
                             ),
+                            maxLength: 20,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
+                            ],
                           ),
                           SizedBox(
                             height: 10.0,
@@ -192,7 +200,9 @@ class Detailmhs extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Nama Lengkap',
+                              counterText: "",
                             ),
+                            maxLength: 40,
                           ),
                           SizedBox(
                             height: 10.0,
@@ -202,7 +212,9 @@ class Detailmhs extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Kelas',
+                              counterText: "",
                             ),
+                            maxLength: 20,
                           ),
                           SizedBox(
                             height: 10.0,
@@ -212,7 +224,9 @@ class Detailmhs extends StatelessWidget {
                             decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Prodi',
+                              counterText: "",
                             ),
+                            maxLength: 25,
                           ),
                         ],
                       ),

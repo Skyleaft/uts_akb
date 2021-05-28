@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:uts_akb/db/db_mhs.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/services.dart';
 
 var txtnim = TextEditingController();
 var txtnama = TextEditingController();
@@ -18,12 +19,29 @@ void clearText() {
   txtprodi.text = "";
 }
 
+bool validate() {
+  if (txtnim.text == "" ||
+      txtnama.text == "" ||
+      txtkelas.text == "" ||
+      txtprodi.text == "") {
+    Fluttertoast.showToast(
+        msg: "Data Masih belum lengkap",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        fontSize: 16.0);
+    return false;
+  } else {
+    return true;
+  }
+}
+
 var checkstats = false;
 var _btnController2 = RoundedLoadingButtonController();
 void _doSomething(RoundedLoadingButtonController controller) async {
   Timer(Duration(seconds: 1), () {
-    saveData();
-    if (checkstats = true) {
+    if (validate()) {
+      saveData();
       controller.success();
       Fluttertoast.showToast(
           msg: "Data Berhasil Disimpan",
@@ -31,8 +49,10 @@ void _doSomething(RoundedLoadingButtonController controller) async {
           gravity: ToastGravity.CENTER,
           timeInSecForIosWeb: 1,
           fontSize: 16.0);
+      clearText();
+    } else {
+      controller.error();
     }
-    clearText();
     Timer(Duration(seconds: 2), () {
       _btnController2.reset();
     });
@@ -46,7 +66,6 @@ Future saveData() async {
     kelas: txtkelas.text,
     prodi: txtprodi.text,
   );
-  checkstats = true;
   await MhsDatabase.instance.create(mhs);
 }
 
@@ -86,7 +105,13 @@ class AddData extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'NIM',
+                counterText: "",
               ),
+              maxLength: 20,
+              keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+              ],
             ),
             SizedBox(
               height: 10.0,
@@ -96,7 +121,9 @@ class AddData extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Nama Lengkap',
+                counterText: "",
               ),
+              maxLength: 40,
             ),
             SizedBox(
               height: 10.0,
@@ -106,7 +133,9 @@ class AddData extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Kelas',
+                counterText: "",
               ),
+              maxLength: 20,
             ),
             SizedBox(
               height: 10.0,
@@ -116,7 +145,9 @@ class AddData extends StatelessWidget {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Prodi',
+                counterText: "",
               ),
+              maxLength: 25,
             ),
             SizedBox(
               height: 15.0,
