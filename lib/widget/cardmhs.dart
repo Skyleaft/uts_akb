@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:uts_akb/db/db_mhs.dart';
 import 'package:uts_akb/models/mahasiswa.dart';
-import 'package:uts_akb/pages/detailmhs.dart';
 import 'package:uts_akb/utils/constants.dart';
-import 'package:uts_akb/utils/helper.dart';
 
 class CardMhs extends StatelessWidget {
   final Mahasiswa mhs;

@@ -5,7 +5,6 @@ import 'package:uts_akb/pages/detailmhs.dart';
 import 'package:uts_akb/pages/home.dart';
 import 'package:uts_akb/pages/login.dart';
 import 'package:uts_akb/utils/constants.dart';
-import 'package:sqflite/sqflite.dart';
 
 void main() {
   runApp(MyApp());

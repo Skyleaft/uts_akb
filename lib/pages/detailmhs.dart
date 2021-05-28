@@ -7,12 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/services.dart';
 
+// ignore: must_be_immutable
 class Detailmhs extends StatelessWidget {
   final Mahasiswa mhs;
   Detailmhs({Key key, this.mhs}) : super(key: key);
-
-  @override
-  void dispose() {}
 
   var txtnim = TextEditingController();
   var txtnama = TextEditingController();
@@ -95,7 +93,7 @@ class Detailmhs extends StatelessWidget {
       backgroundColor: Constants.primaryColor,
       body: Container(
         child: Stack(
-          overflow: Overflow.visible,
+          clipBehavior: Clip.none,
           children: [
             Positioned(
               right: 0.0,

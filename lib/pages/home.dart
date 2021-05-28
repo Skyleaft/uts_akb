@@ -1,7 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:uts_akb/pages/setting.dart';
 import 'package:uts_akb/pages/showdata.dart';
 import 'package:uts_akb/utils/constants.dart';
@@ -55,7 +54,7 @@ class _HomeState extends State<Home> {
       ),
       backgroundColor: Constants.primaryColor,
       body: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: [
           Positioned(
             right: 0.0,
