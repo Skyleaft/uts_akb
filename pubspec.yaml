@@ -40,6 +40,7 @@ dependencies:
   rounded_loading_button: ^2.0.4
   fluttertoast: ^8.0.7
   sqflite: ^2.0.0+3
+  flutter_web_browser: ^0.14.0
 
 dev_dependencies:
   flutter_test:
