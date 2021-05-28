@@ -4,6 +4,7 @@ import 'package:uts_akb/models/mahasiswa.dart';
 import 'package:uts_akb/utils/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Detailmhs extends StatelessWidget {
   final Mahasiswa mhs;
@@ -53,6 +54,12 @@ class Detailmhs extends StatelessWidget {
                   await MhsDatabase.instance.delete(mhs.id);
                   Navigator.of(context).pop();
                   Navigator.of(context).pop();
+                  Fluttertoast.showToast(
+                      msg: "Data Berhasil Dihapus",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      fontSize: 16.0);
                 },
               ),
             ],
@@ -70,6 +77,12 @@ class Detailmhs extends StatelessWidget {
         prodi: txtprodi.text,
       );
       await MhsDatabase.instance.update(tempmhs);
+      Fluttertoast.showToast(
+          msg: "Data Berhasil Diubah",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          fontSize: 16.0);
     }
 
     void onClose() {
