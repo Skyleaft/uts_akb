@@ -103,17 +103,12 @@ class _LoginState extends State<Login> {
                     )),
                     child: Stack(
                       children: <Widget>[
-                        FadeAnimation(
-                          1.3,
-                          Positioned(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                image: AssetImage('assets/images/Vector1.png'),
-                                fit: BoxFit.fill,
-                              )),
-                            ),
-                          ),
+                        Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                            image: AssetImage('assets/images/Vector1.png'),
+                            fit: BoxFit.fill,
+                          )),
                         ),
                         Positioned(
                           child: Center(
