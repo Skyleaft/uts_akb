@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: GoogleFonts.poppinsTextTheme(),
         ),
-        initialRoute: "/",
+        initialRoute: "/Home",
         onGenerateRoute: _onGenerateRoute,
       ),
     );

@@ -2,9 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:uts_akb/pages/setting.dart';
-import 'package:uts_akb/pages/showdata.dart';
+//import 'package:uts_akb/pages/showdata.dart';
 import 'package:uts_akb/utils/constants.dart';
-import 'package:uts_akb/pages/adddata.dart';
+//import 'package:uts_akb/pages/adddata.dart';
+import 'package:uts_akb/pages/homecovid.dart';
+import 'package:uts_akb/pages/covidcountry.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,8 +18,8 @@ class _HomeState extends State<Home> {
   int activeIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    ShowData(),
-    AddData(),
+    HomeCovid(),
+    CovidCountry(),
     Setting(),
   ];
 
@@ -40,7 +42,7 @@ class _HomeState extends State<Home> {
             color: activeIndex == 0 ? Colors.white : Color(0xFFC8C9CB),
           ),
           Icon(
-            FlutterIcons.plus_ant,
+            FlutterIcons.location_city_mdi,
             size: 30.0,
             color: activeIndex == 1 ? Colors.white : Color(0xFFC8C9CB),
           ),
