@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.3
 
 dev_dependencies:
+  change_app_package_name: ^1.0.0
   flutter_test:
     sdk: flutter
 

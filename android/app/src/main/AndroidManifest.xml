@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mzstudio.uts_akb">
+    package="com.mzstudio.tugaspert11">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="uts_akb"
+        android:label="Tugas API"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
